@@ -60,11 +60,6 @@ hr {
 </style>
 <body
 
-<div class="bgimg">
-  <img src="https://zolaris.in/Education/mystudy.png" class="logoimg">
-  <div class="middle">
-    <hr>
-  </div>
-</div>
+
 </body>
 </html>
