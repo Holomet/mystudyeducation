@@ -7,7 +7,7 @@ body, html {
 }
 
 .bgimg {
-  background-image: url('https://raw.githubusercontent.com/Holomet/mystudyeducation/main/forestbridge.jpg');
+  background-image: url('/forestbridge.jpg');
   height: 100%;
   background-position: center;
   background-size: cover;
@@ -60,7 +60,7 @@ hr {
 <body
 
 <div class="bgimg">
-  <img src="https://zolaris.in/Education/mystudy.png" class="logoimg">
+  <img src="/mystudy.png" class="logoimg">
   <div class="middle">
     <h1>COMING SOON</h1>
     <hr>
