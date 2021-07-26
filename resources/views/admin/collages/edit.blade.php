@@ -35,6 +35,38 @@
                             </div>
                         </div>
                         <div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('stall_id') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-stall_id">{{ __('Stall Layout') }}</label>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="stall_id" value="1" {{ $collage->stall_id==1?"checked":"" }} /><label> &nbsp;&nbsp;Stall 1</label>
+                                        <img src="{{ asset('stalls/DJ-AM-038-IM-2001-R1-Stall 1.png') }}" style="width: 100%" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="stall_id" value="2" {{ $collage->stall_id==2?"checked":"" }} /><label> &nbsp;&nbsp;Stall 2</label>
+                                        <img src="{{ asset('stalls/DJ-AM-038-IM-2003-R1-Stall 2.png') }}" style="width: 100%" />
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="stall_id" value="3" {{ $collage->stall_id==3?"checked":"" }} /><label> &nbsp;&nbsp;Stall 3</label>
+                                        <img src="{{ asset('stalls/DJ-AM-038-IM-2005-R1-Stall 3.png') }}" style="width: 100%" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="stall_id" value="4" {{ $collage->stall_id==4?"checked":"" }} /><label> &nbsp;&nbsp;Stall 4</label>
+                                        <img src="{{ asset('stalls/DJ-AM-038-IM-2007-R1-Stall 4.png') }}" style="width: 100%" />
+                                    </div>
+                                </div> 
+
+                                @if ($errors->has('stall_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('stall_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('address')? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-address">{{ __('Address') }}</label>
                                 <textarea name="address" id="input-address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('Address') }}" required autofocus>{{ $collage->address }}</textarea>

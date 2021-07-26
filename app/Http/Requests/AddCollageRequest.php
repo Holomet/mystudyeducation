@@ -26,6 +26,7 @@ class AddCollageRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'address' => 'required|max:250',
+            'stall_id' => 'required|integer|min:1|max:4',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'rollup_banner' => 'required|max:2048',
             'stall_video' => 'required|mimes:mp4,mov,ogg,qt | max:50000',

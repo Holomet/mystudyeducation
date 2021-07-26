@@ -25,6 +25,7 @@ class UpdateCollageRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
+            'stall_id' => 'required|integer|min:1|max:4',
             'address' => 'required|max:250',
             'about' => 'required|max:250',
             'status' => 'required|integer|max:1'

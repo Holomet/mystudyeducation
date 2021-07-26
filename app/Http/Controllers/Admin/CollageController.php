@@ -39,7 +39,7 @@ class CollageController extends Controller
     {
         if(\Auth::user()->role_id!=1)
         {
-            return response('Unauthenticated.', 401);
+            return response('Unautherised.', 401);
         }
     	$zones 		=	ExpoZone::pluck('name', 'id')->toArray();
     	$users 		=	User::where('role_id', 2)->get();
@@ -86,6 +86,7 @@ class CollageController extends Controller
         $request->prospectus->move(public_path('/prospectus/'), $prospectus);
 
         $collage->name 						=	$request->name;
+        $collage->stall_id                  =   $request->stall_id;
         $collage->address 					=	$request->address;
         $collage->logo 						=	$logoname;
         $collage->rollup_banner 			=	$rollup_banner;
@@ -134,6 +135,7 @@ class CollageController extends Controller
     {
     	$collage 			=	Collage::where('id', $request->id)->first();
     	$collage->name 		=	$request->name;
+        $collage->stall_id  =   $request->stall_id;
     	$collage->about 	=	$request->about;
     	$collage->address 	=	$request->address;
     	$collage->status 	=	$request->status;
