@@ -44,6 +44,10 @@
                                 <th>Status</th>
                                 <td>{{ $user->status==1?"Active":"Inactive" }}</td>
                             </tr>
+                            <tr>
+                                <th></th>
+                                <td><a class="btn btn-primary" href="{{ route('admin.users.resetpassword', ['id' => $user->id]) }}">Reset Password</a></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('admin/users/edit/{id}', [App\Http\Controllers\Admin\UsersController::class, 'edit'])->name('admin.users.edit');
 	Route::post('admin/users/update', [App\Http\Controllers\Admin\UsersController::class, 'update'])->name('admin.users.update');
 	Route::get('admin/users/delete/{id}', [App\Http\Controllers\Admin\UsersController::class, 'delete'])->name('admin.users.delete');
+	Route::get('admin/users/resetpassword/{id}', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('admin.users.resetpassword');
+	Route::post('admin/users/updatepassword', [App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('admin.users.updatepassword');
 
 	Route::get('admin/expo', [App\Http\Controllers\Admin\ExpoController::class, 'index'])->name('admin.expo');
 	Route::post('admin/expo/paginate', [App\Http\Controllers\Admin\ExpoController::class, 'paginate'])->name('admin.expo.paginate');

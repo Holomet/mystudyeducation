@@ -94,4 +94,17 @@ class UsersController extends Controller
             return redirect()->back()->with('error', 'Failed to delete the user'); 
         }
     }
+
+    public function resetPassword($id)
+    {
+        return view('admin.users.resetpassword')->with(compact('id'));
+    }
+
+    public function updatePassword()
+    {
+        $user              =   User::where('id', request('id'))->first();
+        $user->password    =   Hash::make(request('password'));
+        $user->save();
+        return redirect(route('admin.users'))->with('success', 'User updated successfully'); 
+    }
 }
