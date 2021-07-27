@@ -32,6 +32,22 @@
                             <td>{{ $collage->name }}</td>
                         </tr>
                         <tr>
+                            <th>Stall</th>
+                            <td>
+                                @if($collage->stall_id==1)
+                                <img src="{{ asset('stalls/DJ-AM-038-IM-2001-R1-Stall 1.png') }}" style="width: 100%" />
+                                @elseif($collage->stall_id==2)
+                                <img src="{{ asset('stalls/DJ-AM-038-IM-2003-R1-Stall 2.png') }}" style="width: 100%" />
+                                @elseif($collage->stall_id==3)
+                                <img src="{{ asset('stalls/DJ-AM-038-IM-2005-R1-Stall 3.png') }}" style="width: 100%" />
+                                @elseif($collage->stall_id==4)
+                                <img src="{{ asset('stalls/DJ-AM-038-IM-2007-R1-Stall 4.png') }}" style="width: 100%" />
+                                @else
+
+                                @endif                                
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Address</th>
                             <td>{!! nl2br($collage->address) !!}</td>
                         </tr>

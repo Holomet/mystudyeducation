@@ -114,7 +114,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.collages') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Collages')}}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Colleges')}}
                     </a>
                 </li>
                 @endif
