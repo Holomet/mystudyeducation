@@ -33,7 +33,7 @@
                                 <td>{{ $course->course_name }}</td>
                             </tr>
                             <tr>
-                                <th>Broschure</th>
+                                <th>Brochure</th>
                                 <td><a href="{{asset('broschure/'.$course->broschure) }}" target="_blank">Download</a></td>
                             </tr>
                             <tr>

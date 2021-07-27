@@ -68,8 +68,8 @@
                         </div>
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('broschure') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-broschure">{{ __('Broschure') }}</label>
-                                <input type="file" name="broschure" id="input-broschure" class="form-control form-control-alternative{{ $errors->has('broschure') ? ' is-invalid' : '' }}" placeholder="{{ __('Broschure') }}" value="" autofocus>
+                                <label class="form-control-label" for="input-broschure">{{ __('Brochure') }}</label>
+                                <input type="file" name="broschure" id="input-broschure" class="form-control form-control-alternative{{ $errors->has('broschure') ? ' is-invalid' : '' }}" placeholder="{{ __('Brochure') }}" value="" autofocus>
 
                                 @if ($errors->has('broschure'))
                                     <span class="invalid-feedback" role="alert">
