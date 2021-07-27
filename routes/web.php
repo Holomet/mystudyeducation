@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('/', function () {
+Route::get('/', function(){
+	return view('home.index');
+})
+Route::any('/admin', function () {
     return redirect('login');
 });
 
