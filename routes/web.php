@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
 	return view('home.index');
 });
-Route::any('/admin', function () {
-    return redirect('login');
-});
 
 Auth::routes();
 
