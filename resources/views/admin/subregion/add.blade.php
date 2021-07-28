@@ -14,18 +14,17 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Edit Course Level</h3>
+                            <h3 class="mb-0">Add Sub Region</h3>
                         </div>
                     </div>
                 </div>
                  <div class="card-body">
-                    <form method="post" action="{{ route('admin.courses.categories.update') }}" autocomplete="off">
+                    <form method="post" action="{{ route('admin.subregion.create') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $coursecategory->id }}">
                          <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ $coursecategory->name }}" required autofocus>
+                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -35,12 +34,28 @@
                             </div>
                         </div>
                         <div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('country_id')? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-country_id">{{ __('Region') }}</label>
+                                <select name="country_id" id="input-country_id" class="form-control form-control-alternative{{ $errors->has('country_id') ? ' is-invalid' : '' }}" >
+                                    <option>Select</option>
+                                    @foreach($countries as $id => $country)
+                                    <option value="{{ $id }}">{{ $country }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('country_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('country_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('status')? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-status">{{ __('Status') }}</label>
                                 <select name="status" id="input-status" class="form-control form-control-alternative{{ $errors->has('status') ? ' is-invalid' : '' }}" >
                                     <option>Select</option>
-                                    <option value="1" {{ $coursecategory->status==1?"selected":"" }}>Active</option>
-                                    <option value="0" {{ $coursecategory->status==0?"selected":"" }}>Inactive</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                                 <span class="invalid-feedback" role="alert">
                                     <strong></strong>
@@ -49,7 +64,7 @@
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-success mt-4">{{ __('Create') }}</button>
-                            <a href="{{ route('admin.courses.categories') }}" class="btn mt-4">Cancel</a>
+                            <a href="{{ route('admin.collages') }}" class="btn mt-4">Cancel</a>
                         </div>
                     </form>
                 </div>

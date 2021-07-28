@@ -51,7 +51,28 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('admin/expo/update', [App\Http\Controllers\Admin\ExpoController::class, 'update'])->name('admin.expo.update');
 	Route::get('admin/expo/delete/{id}', [App\Http\Controllers\Admin\ExpoController::class, 'delete'])->name('admin.expo.delete');
 
-	Route::get('admin/expo/addzone/{id}', [App\Http\Controllers\Admin\ExpoController::class, 'addZone'])->name('admin.expo.addzone');
+
+	Route::get('/admin/region', [App\Http\Controllers\Admin\RegionController::class, 'index'])->name('admin.region');
+	Route::post('/admin/region/paginte', [App\Http\Controllers\Admin\RegionController::class, 'paginate'])->name('admin.region.paginate');
+	Route::get('/admin/region/add', [App\Http\Controllers\Admin\RegionController::class, 'add'])->name('admin.region.add');
+	Route::post('/admin/region/create', [App\Http\Controllers\Admin\RegionController::class, 'create'])->name('admin.region.create');
+	Route::get('/admin/region/edit/{id}', [App\Http\Controllers\Admin\RegionController::class, 'edit'])->name('admin.region.edit');
+	Route::post('/admin/region/update', [App\Http\Controllers\Admin\RegionController::class, 'update'])->name('admin.region.update');
+	Route::get('/admin/region/view/{id}', [App\Http\Controllers\Admin\RegionController::class, 'view'])->name('admin.region.view');
+	Route::get('/admin/region/delete/{id}', [App\Http\Controllers\Admin\RegionController::class, 'delete'])->name('admin.region.delete');
+
+	Route::get('/admin/subregion/index',[App\Http\Controllers\Admin\SubregionController::class, 'index'])->name('admin.subregion.index');
+	Route::post('/admin/subregion/paginte', [App\Http\Controllers\Admin\SubregionController::class, 'paginate'])->name('admin.subregion.paginate');
+	Route::get('/admin/subregion/add', [App\Http\Controllers\Admin\SubregionController::class, 'add'])->name('admin.subregion.add');
+	Route::post('/admin/subregion/create', [App\Http\Controllers\Admin\SubregionController::class, 'create'])->name('admin.subregion.create');
+	Route::get('/admin/subregion/edit/{id}', [App\Http\Controllers\Admin\SubregionController::class, 'edit'])->name('admin.subregion.edit');
+	Route::post('/admin/subregion/update', [App\Http\Controllers\Admin\SubregionController::class, 'update'])->name('admin.subregion.update');
+	Route::get('/admin/subregion/view/{id}', [App\Http\Controllers\Admin\SubregionController::class, 'view'])->name('admin.subregion.view');
+	Route::get('/admin/subregion/delete/{id}', [App\Http\Controllers\Admin\SubregionController::class, 'delete'])->name('admin.subregion.delete');
+
+	Route::get('admin/expo/zones', [App\Http\Controllers\Admin\ExpoController::class, 'zones'])->name('admin.expo.zones');
+	Route::post('admin/expo/zones/paginte', [App\Http\Controllers\Admin\ExpoController::class, 'paginteZones'])->name('admin.expo.zones.paginate');
+	Route::get('admin/expo/addzone', [App\Http\Controllers\Admin\ExpoController::class, 'addZone'])->name('admin.expo.addzone');
 	Route::post('admin/expo/createzone', [App\Http\Controllers\Admin\ExpoController::class, 'createZone'])->name('admin.expo.createzone');
 	Route::get('admin/expo/viewzone/{id}', [App\Http\Controllers\Admin\ExpoController::class, 'viewZone'])->name('admin.expo.viewzone');
 	Route::get('admin/expo/editzone/{id}', [App\Http\Controllers\Admin\ExpoController::class, 'editZone'])->name('admin.expo.editzone');
@@ -122,9 +143,15 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('admin/collages/galleries/saveimage', [App\Http\Controllers\Admin\CollageGalleryController::class, 'saveImage'])->name('admin.collages.courses.image.save');
 	Route::get('admin/collages/galleries/image/delete/{id}', [App\Http\Controllers\Admin\CollageGalleryController::class, 'deleteImage'])->name('admin.collages.gallery.image.delete');
 
+	Route::get('/admin/collages/allseminars', [App\Http\Controllers\Admin\CollageSeminarController::class, 'all'])->name('admin.collages.seminars.all');
+
+
 	Route::get('/admin/collages/seminars/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'index'])->name('admin.collages.seminars');
+	
 	Route::post('/admin/collages/seminars/paginate', [App\Http\Controllers\Admin\CollageSeminarController::class, 'paginate'])->name('admin.collages.seminars.paginate');
+	Route::post('/admin/collages/seminars/paginateall', [App\Http\Controllers\Admin\CollageSeminarController::class, 'paginateall'])->name('admin.collages.seminars.paginateall');
 	Route::get('/admin/collages/seminars/add/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'add'])->name('admin.collages.seminars.add');
+	Route::get('/admin/collages/seminars/add', [App\Http\Controllers\Admin\CollageSeminarController::class, 'addSeminar'])->name('admin.collages.seminars.addseminar');
 	Route::post('/admin/collages/seminars/create', [App\Http\Controllers\Admin\CollageSeminarController::class, 'create'])->name('admin.collages.seminars.create');
 	Route::get('/admin/collages/seminars/edit/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'edit'])->name('admin.collages.seminars.edit');
 	Route::post('/admin/collages/seminars/update', [App\Http\Controllers\Admin\CollageSeminarController::class, 'update'])->name('admin.collages.seminars.update');
@@ -134,4 +161,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('admin/collages/courses/all', [App\Http\Controllers\Admin\CollageCourseController::class, 'courselist'])->name('admin.collages.courselist');
 	Route::get('admin/collages/galleries/all', [App\Http\Controllers\Admin\CollageGalleryController::class, 'gallerylist'])->name('admin.collages.gallerylist');
 	Route::get('admin/collages/seminars/all', [App\Http\Controllers\Admin\CollageSeminarController::class, 'seminarslist'])->name('admin.collages.seminarlist');
+
+
+
 });

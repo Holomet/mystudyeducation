@@ -34,42 +34,18 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="pl-lg-4">
-                            <div class="form-group{{ $errors->has('country_id')? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-country_id">{{ __('Country') }}</label>
-                                <select name="country_id" id="input-country_id" class="form-control form-control-alternative{{ $errors->has('country_id') ? ' is-invalid' : '' }}" >
-                                    <option>Select</option>
-                                    @foreach($countries as $id => $country)
-                                    <option value="{{ $id }}" {{ $zone->country_id==$id?'selected="selected"':"" }} >{{ $country }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('country_id'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="pl-lg-4" style="padding: 20px 0px 20px 0px">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="flexCheckStateRestriction" name="state_restrict" {{ $zone->state_restrict==1?"checked":"" }} />
-                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                    {{ __('Add State wise restriction') }}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="pl-lg-4 stateslist" style="{{$zone->state_restrict==1?'display: block':'display: none;'}}">
+                        <div class="pl-lg-4 stateslist" >
                             <div class="form-group{{ $errors->has('state_id')? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-state_id">{{ __('States') }}</label>
+                                <label class="form-control-label" for="input-state_id">{{ __('Sub Regions') }}</label>
                                 <select name="state_id[]" id="input-state_id" class="form-control form-control-alternative{{ $errors->has('state_id') ? ' is-invalid' : '' }}" multiple>
                                     <option>Select</option>
-                                    @foreach($states as $id => $state)
+                                    @foreach($subregions as $id => $state)
                                     <option value="{{ $id }}" {{ in_array($id, $zonestates)?'selected="selected"':"" }} >{{ $state }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('country_id'))
+                                @if ($errors->has('state_id'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country_id') }}</strong>
+                                        <strong>{{ $errors->first('state_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

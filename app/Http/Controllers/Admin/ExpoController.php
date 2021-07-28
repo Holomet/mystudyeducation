@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Expo;
 use App\Models\State;
 use App\Models\ExpoZone;
-use App\Models\Country;
+use App\Models\SubRegion;
 use App\Models\ZoneState;
 use App\Http\Requests\CreateExpoRequest;
 use App\Http\Requests\UpdateExpoRequest;
@@ -18,6 +18,7 @@ class ExpoController extends Controller
 {
     public function index()
     {
+        return redirect(route('admin.expo.zones'));
     	return view('admin.expo.index');
     }
 
@@ -92,10 +93,29 @@ class ExpoController extends Controller
         }
     }
 
-    public function addZone($id)
+    public function zones()
     {
-        $countries      =   Country::pluck('country_nicename', 'id')->toArray();
-        return view('admin.expo.addzone')->with(compact('id', 'countries'));
+        return view('admin.expo.zones');
+    }
+
+    public function paginteZones()
+    {
+        $limit = (request('length') != '') ? request('length') : 10;
+        $offset = (request('start') != '') ? request('start') : 0;
+
+        $countries = ExpoZone::orderBy('id', 'asc');
+        $result['count'] = $countries->count();
+        $result['data']  = $countries->limit($limit)->offset($offset)->get();
+        $data = ["iTotalDisplayRecords" => $result['count'], "iTotalRecords" => $limit, "TotalDisplayRecords" => $limit];
+        $data['data'] = $result['data'];
+        return response()->json($data);
+    }
+
+    public function addZone()
+    {
+        $id = 1;
+        $subregions         =   SubRegion::where('status',1)->pluck('name','id')->toArray();
+        return view('admin.expo.addzone')->with(compact('id', 'subregions'));
     }
 
     public function expoStates($id)
@@ -108,14 +128,8 @@ class ExpoController extends Controller
     {
         $zone               =   new ExpoZone();
         $zone->expo_id      =   $request->expo_id;
-        $zone->country_id   =   $request->country_id;
         $zone->name         =   $request->name;
         $zone->status       =   $request->status;
-        if(count($request->state_id) > 0){
-            $zone->state_restrict = 1;
-        }else{
-            $zone->state_restrict = 0;
-        }
         if($zone->save()){
             foreach ($request->state_id as $key => $state_id) {
                 $zonestate                  =   new ZoneState();
@@ -124,7 +138,7 @@ class ExpoController extends Controller
                 $zonestate->status          =   1;
                 $zonestate->save();
             }
-            return redirect(route('admin.expo.view',['id' => $zone->expo_id]))->with('success', 'Expo updated successfully'); 
+            return redirect(route('admin.expo.zones'))->with('success', 'Zone created successfully'); 
         }else{
             return redirect()->back()->with('error', 'Something went wrong');    
         }
@@ -133,22 +147,23 @@ class ExpoController extends Controller
     public function editZone($id)
     {
         $zone               =   ExpoZone::where('id', $id)->first();
-        $countries          =   Country::pluck('country_nicename', 'id')->toArray();
         $zonestates         =   ZoneState::where('expo_zone_id', $id)->pluck('state_id','id')->toArray();
-        $states             =   $this->expoStates($zone->country_id);   
-        return view('admin.expo.editzone')->with(compact('zone', 'countries', 'states', 'zonestates'));
+        $subregions         =   SubRegion::where('status',1)->pluck('name','id')->toArray();   
+        return view('admin.expo.editzone')->with(compact('zone', 'subregions', 'zonestates'));
+    }
+
+    public function viewZone($id)
+    {
+        $zone               =   ExpoZone::where('id', $id)->first();
+        $zonestates         =   ZoneState::where('expo_zone_id', $id)->pluck('state_id','id')->toArray();
+        $subregions         =   SubRegion::where('status',1)->pluck('name','id')->toArray();   
+        return view('admin.expo.viewzone')->with(compact('zone', 'subregions', 'zonestates'));   
     }
 
     public function updateZone(UpdateZoneRequest $request){
         $zone               =   ExpoZone::where('id', $request->id)->first();
-        $zone->country_id   =   $request->country_id;
         $zone->name         =   $request->name;
         $zone->status       =   $request->status;
-        if(count($request->state_id) > 0){
-            $zone->state_restrict = 1;
-        }else{
-            $zone->state_restrict = 0;
-        }
         if($zone->save()){
             ZoneState::where('expo_zone_id', $zone->id)->delete();
             foreach ($request->state_id as $key => $state_id) {
@@ -158,7 +173,7 @@ class ExpoController extends Controller
                 $zonestate->status          =   1;
                 $zonestate->save();
             }
-            return redirect(route('admin.expo.view',['id' => $zone->expo_id]))->with('success', 'Expo updated successfully'); 
+            return redirect(route('admin.expo.zones'))->with('success', 'Zone updated successfully'); 
         }else{
             return redirect()->back()->with('error', 'Something went wrong');    
         }

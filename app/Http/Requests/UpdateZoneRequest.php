@@ -26,8 +26,8 @@ class UpdateZoneRequest extends FormRequest
         return [
             'id' => 'required|exists:expo_zones,id',
             'name' => 'required|max:100',
-            'country_id' => 'required|exists:countries,id',
-            'status' => 'required|integer|max:1'
+            'status' => 'required|integer|max:1',
+            'state_id' => 'required'
         ];
     }
 }

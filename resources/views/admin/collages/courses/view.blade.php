@@ -25,8 +25,12 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th>Course Category</th>
+                                <th>Course Level</th>
                                 <td>{{ $course->course->category->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Course Category</th>
+                                <td>{{ $course->course->name }}</td>
                             </tr>
                             <tr>
                                 <th>Course Name</th>

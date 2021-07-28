@@ -14,24 +14,26 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Course Category Details</h3>
+                            <h3 class="mb-0">View Region</h3>
                         </div>
                     </div>
                 </div>
                  <div class="card-body">
                     <table class="table table-striped">
-                        <tr>
-                            <th>Name</th>
-                            <td>{{ $course->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Course Level</th>
-                            <td>{{ $course->category->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td>{{ $course->status==1?"Active":"Inactive" }}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ $country->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Statue</th>
+                                <td>{{ $country->status==1?"Active":"Inactive" }}</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

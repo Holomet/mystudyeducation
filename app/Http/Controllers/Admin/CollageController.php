@@ -117,17 +117,24 @@ class CollageController extends Controller
     public function view($id)
     {
     	$collage 			=	Collage::where('id', $id)->first();
-    	$collagezones 		=	CollageZone::with('expozone')->where('college_id', $id)->get();
+    	$collagezones 		=	CollageZone::where('status', 1)->with('expozone')->where('college_id', $id)->get();
     	return view('admin.collages.view')->with(compact('collage','collagezones'));
     }
 
     public function edit($id)
     {
     	$collage 			=	Collage::where('id', $id)->first();
-    	$collagezones 		=	CollageZone::where('college_id', $id)->pluck('expo_zone_id', 'id')->toArray();
+    	$collagezones 		=	CollageZone::where('college_id', $id)->where('status', 1)->pluck('expo_zone_id', 'id')->toArray();
+
 
     	$users 		=	User::where('role_id', 2)->get();
-    	$zones 		=	ExpoZone::pluck('name', 'id')->toArray();
+        if(\Auth::user()->role_id==1)
+        {
+    	   $zones 		=	ExpoZone::pluck('name', 'id')->toArray();
+        }else{
+            $incollagezones       =   CollageZone::where('college_id', $id)->pluck('expo_zone_id', 'id')->toArray();            
+            $zones      =   ExpoZone::whereIn('id', $incollagezones)->pluck('name', 'id')->toArray();
+        }
     	return view('admin.collages.edit')->with(compact('collage', 'collagezones','zones', 'users'));
     }
 
@@ -154,6 +161,32 @@ class CollageController extends Controller
     				$collagezone->updated_by 	=	\Auth::user()->id;
     				$collagezone->save();
             	}
+            }else{
+                $collagezones       =   CollageZone::where('college_id', $request->id)->pluck('expo_zone_id', 'id')->toArray(); 
+                CollageZone::where('college_id', $request->id)->delete();
+                foreach ($request->zones as $id => $zone) {
+                    $collagezone                =   new CollageZone();
+                    $collagezone->college_id    =   $collage->id;
+                    $collagezone->expo_zone_id  =   $zone;
+                    $collagezone->status        =   1;
+                    $collagezone->created_by    =   \Auth::user()->id;
+                    $collagezone->updated_by    =   \Auth::user()->id;
+                    $collagezone->save();
+                    if(in_array($zone, $collagezones)){
+                        $collagezones = array_filter($collagezones, function($e) use ($zone){
+                            return ($e !== $zone);
+                        });
+                    }
+                }
+                foreach ($collagezones as $key => $zone) {
+                    $collagezone                =   new CollageZone();
+                    $collagezone->college_id    =   $collage->id;
+                    $collagezone->expo_zone_id  =   $zone;
+                    $collagezone->status        =   0;
+                    $collagezone->created_by    =   \Auth::user()->id;
+                    $collagezone->updated_by    =   \Auth::user()->id;
+                    $collagezone->save();
+                }
             }
         	return redirect(route('admin.collages'))->with('success', 'Collage updated successfully');
     	}else{

@@ -14,10 +14,10 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Course Levels</h3>
+                            <h3 class="mb-0">Sub Region</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('admin.courses.categories.add') }}" class="btn btn-sm btn-primary">Create Course Level</a>
+                            <a href="{{ route('admin.subregion.add') }}" class="btn btn-sm btn-primary">Add Subregion</a>
                         </div>
                     </div>
                 </div>
@@ -29,6 +29,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Country</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -49,9 +50,9 @@
     var slno = 0;
     var baseurl = "{{ url('/') }}";
 
-    var view    =   "{{ route('admin.courses.categories.view', ['id' => '__id']) }}";
-    var edit = "{{ route('admin.courses.categories.edit',['id'=>'__id']) }}";
-    var deletelink = "{{ route('admin.courses.categories.delete',['id'=>'__id']) }}";
+    var view    =   "{{ route('admin.subregion.view', ['id' => '__id']) }}";
+    var edit = "{{ route('admin.subregion.edit',['id'=>'__id']) }}";
+    var deletelink = "{{ route('admin.subregion.delete',['id'=>'__id']) }}";
     
     var cmsdatatable = $("#datatable").DataTable({
     "pageLength": 25,
@@ -73,7 +74,7 @@
         'processing': ''
     },
     "ajax": {
-        "url": "{{ route('admin.courses.categories.paginate') }}",
+        "url": "{{ route('admin.subregion.paginate') }}",
         "type": "post",
         "data": function (data) {
             data._token = "{{ csrf_token() }}";
@@ -87,6 +88,7 @@
             } 
         },
         {"data": "name"},
+        {"data": "country.name"},
         { "data": "stat", "name": "stat", "render": function(data,type,row){
             if(row.status==1){
                 return "{{ __('Active') }}";
@@ -98,7 +100,7 @@
             "data": "action", "name": "action", "render": function (data, type, row) {
                 action = "<a class='edit btn btn-info' href='"+view.replace("__id",row.id)+"'><i class='fa fa-eye'></i></a>";
                 action += "<a class='edit btn btn-info' href='"+edit.replace("__id",row.id)+"'><i class='fa fa-edit'></i></a>";
-                action += "<a class='btn btn-danger' onclick='return confirm(\"Are you sure to delete this category? \")' href='"+deletelink.replace("__id",row.id)+"'><i class='fa fa-trash'></i></a>";
+                action += "<a class='btn btn-danger' onclick='return confirm(\"Are you sure to delete this region? \")' href='"+deletelink.replace("__id",row.id)+"'><i class='fa fa-trash'></i></a>";
                 return action;
             }
         }
@@ -120,27 +122,5 @@
     }
 });
     
-    $(document).on("click", ".deletemenu", function(){
-        var url = $(this).attr('href');
-        var r = confirm("Are you sure to delete this menu item?");
-        if(r)
-        {
-            $.ajax({
-                url : url,
-                dataType: 'json'
-            }).done(function(data){
-                if(data.status==1)
-                {
-                    alert("Menu deleted successfully");
-                    window.location.reload();
-                }else{
-                    alert("Something went wrong");
-                }
-            }).fail(function(data){
-                alert("Something went wrong");
-            });
-        }
-        return false;
-    })
 </script>
 @endpush

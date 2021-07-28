@@ -101,7 +101,6 @@
                                 </span>
                             </div>
                         </div>
-                        @if(\Auth::user()->role_id==1)
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('zones')? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-zones">{{ __('Zones') }}</label>
@@ -115,7 +114,6 @@
                                 </span>
                             </div>
                         </div>
-                        @endif
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('status')? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-status">{{ __('Status') }}</label>

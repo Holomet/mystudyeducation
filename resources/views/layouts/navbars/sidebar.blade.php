@@ -97,24 +97,41 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.expo') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Expo')}}
+                    <a class="nav-link" href="{{ route('admin.region') }}">
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Regions')}}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.subregion.index') }}">
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Sub Regions') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.expo.zones') }}">
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Zones') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.courses.categories') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Course Categories')}}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Course Levels')}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.courses') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Course')}}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Course Categories')}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.collages') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Colleges')}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.collages.seminars.all') }}">
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Seminars')}}
                     </a>
                 </li>
                 @endif

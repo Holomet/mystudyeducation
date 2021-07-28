@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateZoneRequest extends FormRequest
+class CreateSubregionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class CreateZoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'expo_id' => 'required|exists:expos,id',
+            'country_id' => 'required|exists:countries,id',
             'name' => 'required|max:100',
-            'status' => 'required|integer|max:1',
-            'state_id' => 'required'
+            'status' => 'required|integer|max:1'
         ];
     }
 }

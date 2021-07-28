@@ -14,18 +14,18 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Edit Course Level</h3>
+                            <h3 class="mb-0">Edit Region</h3>
                         </div>
                     </div>
                 </div>
                  <div class="card-body">
-                    <form method="post" action="{{ route('admin.courses.categories.update') }}" autocomplete="off">
+                    <form method="post" action="{{ route('admin.region.update') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $coursecategory->id }}">
+                        <input type="hidden" name="id" value="{{ $country->id }}">
                          <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ $coursecategory->name }}" required autofocus>
+                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ $country->name }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -39,8 +39,8 @@
                                 <label class="form-control-label" for="input-status">{{ __('Status') }}</label>
                                 <select name="status" id="input-status" class="form-control form-control-alternative{{ $errors->has('status') ? ' is-invalid' : '' }}" >
                                     <option>Select</option>
-                                    <option value="1" {{ $coursecategory->status==1?"selected":"" }}>Active</option>
-                                    <option value="0" {{ $coursecategory->status==0?"selected":"" }}>Inactive</option>
+                                    <option value="1" {{ $country->status==1?"selected":"" }}>Active</option>
+                                    <option value="0" {{ $country->status==0?"selected":"" }}>Inactive</option>
                                 </select>
                                 <span class="invalid-feedback" role="alert">
                                     <strong></strong>
@@ -48,8 +48,8 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success mt-4">{{ __('Create') }}</button>
-                            <a href="{{ route('admin.courses.categories') }}" class="btn mt-4">Cancel</a>
+                            <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
+                            <a href="{{ route('admin.collages') }}" class="btn mt-4">Cancel</a>
                         </div>
                     </form>
                 </div>

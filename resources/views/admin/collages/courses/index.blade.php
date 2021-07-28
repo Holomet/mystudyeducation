@@ -30,6 +30,7 @@
                                 <th>#</th>
                                 <th>Course</th>
                                 <th>Category</th>
+                                <th>Level</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -88,6 +89,7 @@
             } 
         },
         {"data": "course_name"},
+        {"data": "course.name"},
         {"data": "course.category.name"},
         {
             "data": "action", "name": "action", "render": function (data, type, row) {

@@ -24,6 +24,10 @@ class CollageSeminarController extends Controller
     	return view('admin.collages.seminars.index')->with(compact('id'));
     }
 
+    public function all()
+    {
+        return view('admin.collages.seminars.all');   
+    }
     public function paginate()
     {
     	$collage_id  = request('collage_id');
@@ -44,6 +48,19 @@ class CollageSeminarController extends Controller
         $data = ["iTotalDisplayRecords" => $result['count'], "iTotalRecords" => $limit, "TotalDisplayRecords" => $limit];
         $data['data'] = $result['data'];
         return response()->json($data);
+    }
+
+    public function paginateall()
+    {
+        $limit = (request('length') != '') ? request('length') : 10;
+        $offset = (request('start') != '') ? request('start') : 0;
+        
+        $seminars = Seminar::orderBy('id', 'asc');
+        $result['count'] = $seminars->count();
+        $result['data']  = $seminars->limit($limit)->offset($offset)->get();
+        $data = ["iTotalDisplayRecords" => $result['count'], "iTotalRecords" => $limit, "TotalDisplayRecords" => $limit];
+        $data['data'] = $result['data'];
+        return response()->json($data);   
     }
 
     public function add($id)

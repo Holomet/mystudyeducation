@@ -14,7 +14,7 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Create Course</h3>
+                            <h3 class="mb-0">Create Course Category</h3>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('course_category_id')? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-course_category_id">{{ __('Category') }}</label>
+                                <label class="form-control-label" for="input-course_category_id">{{ __('Course Level') }}</label>
                                 <select name="course_category_id" id="input-course_category_id" class="form-control form-control-alternative{{ $errors->has('course_category_id') ? ' is-invalid' : '' }}" >
                                     <option>Select</option>
                                     @foreach($categories as $id => $category)

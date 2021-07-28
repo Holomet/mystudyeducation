@@ -14,10 +14,10 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Courses</h3>
+                            <h3 class="mb-0">Course Categories</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('admin.courses.add') }}" class="btn btn-sm btn-primary">Create Course</a>
+                            <a href="{{ route('admin.courses.add') }}" class="btn btn-sm btn-primary">Create Course Category</a>
                         </div>
                     </div>
                 </div>

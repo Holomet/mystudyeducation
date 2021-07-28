@@ -27,7 +27,7 @@
                         <input type="hidden" name="id" value="{{ $course->id }}" />
                         <div class="pl-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label" for="input-category">{{ __('Course Category') }}</label>
+                                <label class="form-control-label" for="input-category">{{ __('Course Level') }}</label>
                                 <select name="category" id="input-category" class="form-control form-control-alternative" >
                                     <option>Select</option>
                                     @foreach($categories as $id => $category)
@@ -41,7 +41,7 @@
                         </div>
                         <div class="pl-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label" for="input-category">{{ __('Course') }}</label>
+                                <label class="form-control-label" for="input-category">{{ __('Course Category') }}</label>
                                 <select name="course_id" id="input-course" class="form-control form-control-alternative" >
                                     <option>Select</option>
 
