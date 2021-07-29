@@ -144,6 +144,10 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('admin/collages/galleries/image/delete/{id}', [App\Http\Controllers\Admin\CollageGalleryController::class, 'deleteImage'])->name('admin.collages.gallery.image.delete');
 
 	Route::get('/admin/collages/allseminars', [App\Http\Controllers\Admin\CollageSeminarController::class, 'all'])->name('admin.collages.seminars.all');
+	Route::get('/admin/collages/seminars/addnew', [App\Http\Controllers\Admin\CollageSeminarController::class, 'addSeminar'])->name('admin.collages.seminars.addseminar');
+	Route::post('/admin/collages/seminars/createnew', [App\Http\Controllers\Admin\CollageSeminarController::class, 'createSeminar'])->name('admin.collages.seminars.createnew');
+	Route::get('/admin/collages/seminars/editnew/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'editSeminar'])->name('admin.collages.seminars.editseminar');
+	Route::post('/admin/collages/seminars/updatenew', [App\Http\Controllers\Admin\CollageSeminarController::class, 'updateSeminar'])->name('admin.collages.seminars.updateseminar');
 
 
 	Route::get('/admin/collages/seminars/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'index'])->name('admin.collages.seminars');
@@ -151,7 +155,6 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/admin/collages/seminars/paginate', [App\Http\Controllers\Admin\CollageSeminarController::class, 'paginate'])->name('admin.collages.seminars.paginate');
 	Route::post('/admin/collages/seminars/paginateall', [App\Http\Controllers\Admin\CollageSeminarController::class, 'paginateall'])->name('admin.collages.seminars.paginateall');
 	Route::get('/admin/collages/seminars/add/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'add'])->name('admin.collages.seminars.add');
-	Route::get('/admin/collages/seminars/add', [App\Http\Controllers\Admin\CollageSeminarController::class, 'addSeminar'])->name('admin.collages.seminars.addseminar');
 	Route::post('/admin/collages/seminars/create', [App\Http\Controllers\Admin\CollageSeminarController::class, 'create'])->name('admin.collages.seminars.create');
 	Route::get('/admin/collages/seminars/edit/{id}', [App\Http\Controllers\Admin\CollageSeminarController::class, 'edit'])->name('admin.collages.seminars.edit');
 	Route::post('/admin/collages/seminars/update', [App\Http\Controllers\Admin\CollageSeminarController::class, 'update'])->name('admin.collages.seminars.update');

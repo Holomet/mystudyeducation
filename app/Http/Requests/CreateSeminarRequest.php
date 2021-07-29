@@ -24,9 +24,9 @@ class CreateSeminarRequest extends FormRequest
     public function rules()
     {
         return [
-            'collage_id' => 'required|exists:collages,id',
             'description' => 'max:250',
-            'url' => 'required|max:100',
+            'start_date' => 'date|required',
+            'url' => 'max:100',
             'status' => 'required|integer|max:1'
         ];
     }

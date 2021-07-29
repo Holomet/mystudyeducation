@@ -26,7 +26,7 @@ class UpdateSeminarRequest extends FormRequest
         return [
             'id' => 'required|exists:seminars,id',
             'description' => 'max:250',
-            'url' => 'required|max:100',
+            'url' => 'max:100',
             'status' => 'required|integer|max:1'
         ];
     }

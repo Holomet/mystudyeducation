@@ -19,7 +19,10 @@
                     </div>
                 </div>
                  <div class="card-body">
-                    <form method="post" enctype="multipart/form-data" action="{{ route('admin.collages.seminars.update') }}" autocomplete="off">
+                    @if($errors->any())
+                        {{ implode('', $errors->all('<div>:message</div>')) }}
+                    @endif
+                    <form method="post" enctype="multipart/form-data" action="{{ route('admin.collages.seminars.updateseminar') }}" autocomplete="off">
                         @csrf
                         <input type="hidden" name="id" value="{{ $seminar->id }}" />
                          <div class="pl-lg-4">
@@ -48,11 +51,26 @@
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('url') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-url">{{ __('URL') }}</label>
-                                <input type="text" name="url" id="input-url" class="form-control form-control-alternative{{ $errors->has('url') ? ' is-invalid' : '' }}" placeholder="{{ __('URL') }}" value="{{ $seminar->url }}" required autofocus>
+                                <input type="text" name="url" id="input-url" class="form-control form-control-alternative{{ $errors->has('url') ? ' is-invalid' : '' }}" placeholder="{{ __('URL') }}" value="{{ $seminar->url }}" autofocus>
 
                                 @if ($errors->has('url'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('url') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div><div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('collage_id')? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-collage_id">{{ __('College') }}</label>
+                                <select name="collage_id" id="input-collage_id" class="form-control form-control-alternative{{ $errors->has('collage_id') ? ' is-invalid' : '' }}" >
+                                    <option value="">Select</option>
+                                    @foreach($collages as $id => $collage)
+                                    <option value="{{ $id }}" {{ $seminar->college_id==$id?"selected":"" }}>{{ $collage }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('collage_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('collage_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

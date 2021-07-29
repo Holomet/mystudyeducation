@@ -76,6 +76,16 @@ class CollageSeminarController extends Controller
     	return view('admin.collages.seminars.add')->with(compact('id'));	
     }
 
+    public function addSeminar()
+    {
+        if(\Auth::user()->role_id!=1)
+        {
+            return response('Unautherised.', 401);
+        }
+        $collages           =   Collage::pluck('name','id')->toArray();
+        return view('admin.collages.seminars.addnew')->with(compact('collages'));
+    }
+
     public function create(CreateSeminarRequest $request)
     {
     	if(\Auth::user()->role_id!=1)
@@ -90,7 +100,11 @@ class CollageSeminarController extends Controller
     	$seminar->college_id				=	$request->collage_id;
     	$seminar->name 						=	$request->name;
     	$seminar->description 				=	$request->description;
-    	$seminar->url 						=	$request->url;
+    	$seminar->url 						=	isset($request->url)?$request->url:"";
+        $seminar->start_date                =   $request->start_date;
+        if($request->end_date){
+            $seminar->end_date                  =   $request->end_date?$request->end_date:"";
+        }
     	$seminar->status 					=	$request->status;
     	$seminar->created_by 				=	\Auth::user()->id;
     	$seminar->updated_by				=	\Auth::user()->id;
@@ -100,6 +114,35 @@ class CollageSeminarController extends Controller
     	}else{
     		return redirect()->back()->with('error', 'Something went wrong');
     	}
+    }
+
+    public function createSeminar(CreateSeminarRequest $request)
+    {
+        if(\Auth::user()->role_id!=1)
+        {
+            return response('Unautherised.', 401);
+        }
+        $seminar                            =   new Seminar();
+        if($request->collage_id)
+        {
+            $seminar->college_id                =   $request->collage_id?$request->collage_id:"";
+        }
+        $seminar->name                      =   $request->name;
+        $seminar->description               =   $request->description;
+        $seminar->url                       =   isset($request->url)?$request->url:"";
+        $seminar->start_date                =   $request->start_date;
+        if($request->end_date){
+            $seminar->end_date                  =   $request->end_date?$request->end_date:"";
+        }
+        $seminar->status                    =   $request->status;
+        $seminar->created_by                =   \Auth::user()->id;
+        $seminar->updated_by                =   \Auth::user()->id;
+        if($seminar->save())
+        {
+            return redirect(route('admin.collages.seminars.all',))->with('success', 'Seminar added successfully');
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong');
+        }   
     }
 
     public function edit($id)
@@ -116,6 +159,18 @@ class CollageSeminarController extends Controller
     	return view('admin.collages.seminars.edit')->with(compact('seminar'));	
     }
 
+    public function editSeminar($id)
+    {
+        if(\Auth::user()->role_id!=1)
+        {
+            return response('Unautherised.', 401);
+        }
+        $seminar                =   Seminar::where('id', $id)->first();        
+        $collages               =   Collage::pluck('name','id')->toArray();
+        
+        return view('admin.collages.seminars.editnew')->with(compact('seminar', 'collages'));     
+    }
+
     public function update(UpdateSeminarRequest $request)
     {
     	$seminar 							=	Seminar::where('id', $request->id)->first();
@@ -129,7 +184,14 @@ class CollageSeminarController extends Controller
     	}
     	$seminar->name 						=	$request->name;
     	$seminar->description 				=	$request->description;
-    	$seminar->url 						=	$request->url;
+    	$seminar->url 						=	isset($request->url)?$request->url:"";
+        $seminar->start_date                =   $request->start_date;
+        if($request->end_date){
+            $seminar->end_date              =   $request->end_date;
+        }
+        else{
+            $seminar->end_date              =   null;
+        }
     	$seminar->status 					=	$request->status;
     	$seminar->updated_by				=	\Auth::user()->id;
     	if($seminar->save())
@@ -140,6 +202,37 @@ class CollageSeminarController extends Controller
     	}	
     }
 
+    public function updateSeminar(UpdateSeminarRequest $request)
+    {
+        if(\Auth::user()->role_id!=1)
+        {
+            return response('Unautherised.', 401);
+        }
+        $seminar                            =   Seminar::where('id', $request->id)->first();
+        if(isset($request->college_id)){
+            $seminar->college_id            =   $request->college_id;
+        }else{
+            $seminar->college_id            =   null;
+        }
+        $seminar->name                      =   $request->name;
+        $seminar->description               =   $request->description;
+        $seminar->url                       =   isset($request->url)?$request->url:"";
+        $seminar->start_date                =   $request->start_date;
+        if($request->end_date){
+            $seminar->end_date              =   $request->end_date;
+        }
+        else{
+            $seminar->end_date              =   null;
+        }
+        $seminar->status                    =   $request->status;
+        $seminar->updated_by                =   \Auth::user()->id;
+        if($seminar->save())
+        {
+            return redirect(route('admin.collages.seminars.all'))->with('success', 'Seminar updateds successfully');
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong');
+        }   
+    }
 
     public function view($id)
     {

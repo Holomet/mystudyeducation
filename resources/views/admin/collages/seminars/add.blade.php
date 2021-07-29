@@ -19,9 +19,6 @@
                     </div>
                 </div>
                  <div class="card-body">
-                    @if($errors->any())
-                        {{ implode('', $errors->all('<div>:message</div>')) }}
-                    @endif
                     <form method="post" enctype="multipart/form-data" action="{{ route('admin.collages.seminars.create') }}" autocomplete="off">
                         @csrf
                         <input type="hidden" name="collage_id" value="{{ $id }}" />
@@ -51,11 +48,35 @@
                         <div class="pl-lg-4">
                             <div class="form-group{{ $errors->has('url') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-url">{{ __('URL') }}</label>
-                                <input type="text" name="url" id="input-url" class="form-control form-control-alternative{{ $errors->has('url') ? ' is-invalid' : '' }}" placeholder="{{ __('URL') }}" value="{{ old('url') }}" required autofocus>
+                                <input type="text" name="url" id="input-url" class="form-control form-control-alternative{{ $errors->has('url') ? ' is-invalid' : '' }}" placeholder="{{ __('URL') }}" value="{{ old('url') }}" autofocus>
 
                                 @if ($errors->has('url'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('url') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('start_date') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-start_date">{{ __('Start Date') }}</label>
+                                <input type="text" name="start_date" id="input-start_date" class="datepicker form-control form-control-alternative{{ $errors->has('start_date') ? ' is-invalid' : '' }}" placeholder="{{ __('Start Date') }}" value="{{ old('start_date') }}" required autofocus>
+
+                                @if ($errors->has('start_date'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('start_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('end_date') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-end_date">{{ __('End Date') }}</label>
+                                <input type="text" name="end_date" id="input-end_date" class="datepicker form-control form-control-alternative{{ $errors->has('end_date') ? ' is-invalid' : '' }}" placeholder="{{ __('End Date') }}" value="{{ old('end_date') }}" autofocus>
+
+                                @if ($errors->has('end_date'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('end_date') }}</strong>
                                     </span>
                                 @endif
                             </div>

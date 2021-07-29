@@ -14,14 +14,14 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Collage Details</h3>
+                            <h3 class="mb-0">College Details</h3>
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('admin.collages.courses',['id' => $collage->id]) }}" class="btn btn-sm btn-primary">Courses</a>
 
                             <a href="{{ route('admin.collages.gallery', ['id' => $collage->id]) }}" class="btn btn-sm btn-primary">Gallery</a>
 
-                            <a href="{{ route('admin.collages.seminars', ['id' => $collage->id]) }}" class="btn btn-sm btn-primary">Seminarts</a>
+                            <a href="{{ route('admin.collages.seminars', ['id' => $collage->id]) }}" class="btn btn-sm btn-primary">Seminars</a>
                         </div>
                     </div>
                 </div>

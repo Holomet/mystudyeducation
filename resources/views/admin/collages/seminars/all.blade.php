@@ -29,6 +29,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -50,7 +52,7 @@
     var baseurl = "{{ url('/') }}";
 
     var view    =   "{{ route('admin.collages.seminars.view', ['id' => '__id']) }}";
-    var edit = "{{ route('admin.collages.seminars.edit',['id'=>'__id']) }}";
+    var edit = "{{ route('admin.collages.seminars.editseminar',['id'=>'__id']) }}";
     var deletelink = "{{ route('admin.collages.seminars.delete',['id'=>'__id']) }}";
     
     var cmsdatatable = $("#datatable").DataTable({
@@ -87,7 +89,8 @@
             } 
         },
         {"data": "name"},
-
+        {"data": "start_date"},
+        {"data": "end_date"},
         { "data": "stat", "name": "stat", "render": function(data,type,row){
             if(row.status==1){
                 return "{{ __('Active') }}";
