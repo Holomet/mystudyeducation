@@ -21,7 +21,7 @@ class HomeController extends Controller
     			return view('admin.home.collage')->with(compact('collages'));	
     		}
     		else{
-    			return view('admin.home.contact');
+    			return view('admin.home.nocollege');
     		}
     	}
     }
